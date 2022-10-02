@@ -26,6 +26,9 @@ jobs:
       uses: tonynv/asciidoctor-action@master
       with:
           program: "cd docs && make adoc"
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 7.12.2
     - uses: actions/setup-node@v3
       with:
         node-version: 16
