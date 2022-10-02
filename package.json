@@ -28,7 +28,7 @@
     "babel-preset-jest": "26",
     "cypress": "10",
     "eslint": "8",
-    "eslint-plugin-prettier": "3",
+    "eslint-plugin-prettier": "4",
     "eslint-plugin-vue": "9",
     "jest": "26",
     "prettier": "^2.7.1",
