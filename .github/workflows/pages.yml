@@ -26,6 +26,8 @@ jobs:
       uses: tonynv/asciidoctor-action@master
       with:
           program: "cd docs && make adoc"
+    - name: Change owner of ./dist directory
+      run: sudo chown -R runner:docker ./dist
     - uses: pnpm/action-setup@v2
       with:
         version: 7.12.2
