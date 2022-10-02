@@ -26,13 +26,15 @@ jobs:
       uses: tonynv/asciidoctor-action@master
       with:
           program: "cd docs && make adoc"
+    - name: Checkout
+      uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
         node-version: 16
-        cache: 'npm'
-    - run: npm install
-    - run: npm run test:unit
-    - run: npx vite build --base=/nodejs-notes/
+        cache: 'pnpm'
+    - run: pnpm install
+    - run: pnpm run test:unit
+    - run: pnpm exec vite build --base=/nodejs-notes/
     - name: Build with Jekyll
       uses: actions/jekyll-build-pages@v1
       with:
