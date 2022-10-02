@@ -1,6 +1,6 @@
 ifndef::leveloffset[]
 ifeval::["{backend}" == "html5"]
 <<index.adoc#,*Index*>> {vbar}
-<<version_manager.adc#,Version Manager>> +
+<<version_manager.adoc#,Version Manager>> +
 endif::[]
 endif::[]
