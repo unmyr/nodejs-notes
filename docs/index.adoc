@@ -2,8 +2,93 @@ ifndef::leveloffset[]
 :toc: left
 :toclevels: 3
 :icons: font
+ifndef::imagesdir[]
+:imagesdir: images
+endif::[]
 endif::[]
 
 include::header.adoc[]
 
 == Node.js Notes
+
+== Troubleshooting
+
+=== Cypress
+
+==== Cannot find name 'cy'.
+
+**Symptom**
+
+[source,typescript]
+----
+describe('document root', () => {
+  it('should display header text', () => {
+    cy.visit('/')
+    cy.contains('h1', 'Hello Vue 3 + TypeScript + Vite')
+  })
+})
+----
+
+image::trbl-cypress-cannot_find_name_cy.png[] 
+
+**Cause**
+
+Cypress Types Conflict with Jest.
+
+.References
+* https://docs.cypress.io/guides/tooling/typescript-support#Configure-tsconfig-json[TypeScript | Cypress Documentation^] +
+  cannot find name cy - Google Search
+* https://docs.cypress.io/guides/component-testing/component-test-troubleshooting#The-TypeScript-Types-for-cy-mount-is-Not-Working-in-Component-Tests[Component Troubleshooting | Cypress Documentation^] +
+  tsconfig.json jest cypress - Google Search
+* https://docs.cypress.io/guides/component-testing/component-test-troubleshooting#Cypress-Types-Conflict-with-Jest[Component Troubleshooting | Cypress Documentation^] +
+  cypress cannot find name cy "reference types" - Google Search
+
+**Workaround 1**
+
+Add a comment.
+
+[source,typescript]
+----
+/// <reference types="cypress" />
+describe('document root', () => {
+  it('should display header text', () => {
+    cy.visit('/')
+    cy.contains('h1', 'Hello Vue 3 + TypeScript + Vite')
+  })
+})
+----
+
+**Workaround 2**
+
+Add another tsconfig.json to the parent directory of your source code.
+
+[source,json]
+.ex. path/to/tsconfig.json
+----
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": false,
+    "types": ["cypress"],
+  },
+  "include": ["specs/*.ts"]
+}
+----
+
+==== 'root.cy.ts' cannot be compiled under '--isolatedModules' ...
+
+**Symptom**
+
+[source,plaintext]
+----
+'root.cy.ts' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+----
+
+**Cause**
+
+.References
+* https://bobbyhadz.com/blog/typescript-cannot-be-compiled-under-isolatedmodules[Cannot be compiled under 'isolatedModules' because it is considered a global script file | bobbyhadz^] +
+  cannot be compiled under '--isolatedModules' - Google Search
+* https://zenn.dev/ryo_kawamata/articles/0f63b7ffdaed97[ts-jestでcannot be compiled under '--isolatedModules'と出た時の対処法^] +
+  cannot be compiled under '--isolatedModules' - Google Search
+* https://stackoverflow.com/questions/57860261/isolatedmodules-error-on-jest-test-with-create-react-app-and-typescript[jestjs - isolatedModules error on Jest test with Create React App and TypeScript? - Stack Overflow^]

@@ -132,6 +132,21 @@ export default defineConfig({
 });
 ----
 
+** Add tsconfig.json to `tests/e2e` folder.
++
+[source,json]
+.tests/e2e/tsconfig.json
+----
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": false,
+    "types": ["cypress"],
+  },
+  "include": ["specs/*.ts"]
+}
+----
+
 ** Add a test code
 +
 [source,typescript]
