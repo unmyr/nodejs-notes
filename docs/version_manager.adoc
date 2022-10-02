@@ -1,0 +1,313 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+endif::[]
+
+include::header.adoc[]
+
+== Version Manager
+
+[#install_nodejs_on_linux]
+=== n package
+
+* https://qiita.com/seibe/items/36cef7df85fe2cefa3ea[Ubuntuに最新のNode.jsを難なくインストールする - Qiita]
+* https://co.bsnws.net/article/139[Node.jsのバージョンを管理するライブラリ「n」 | cupOF Interests^] +
+  node n package | Google Search
+
+//^
+
+. Install Node.js
++
+[source,shell]
+----
+sudo apt install --no-install-recommends -y nodejs npm
+----
+
+. Install `n`
++
+[source,console]
+----
+$ sudo npm install n -g
+/usr/local/bin/n -> /usr/local/lib/node_modules/n/bin/n
++ n@8.0.1
+added 1 package from 2 contributors in 0.937s
+----
+
+. List LTS
++
+[source,console]
+----
+$ n --lts
+16.13.1
+----
+
+. Install LTS
++
+[source,console]
+----
+$ sudo n lts
+----
+
+. 古い nodejs, npm を消した後、再ログイン
++
+[source,shell]
+----
+sudo apt purge -y nodejs npm
+exec $SHELL -l
+----
+
+. List
++
+[source,shell]
+----
+n list
+----
+
+. Installing Latest
++
+[source,console]
+----
+$ sudo n lts
+[sudo] password for guest:
+
+  installing : node-v14.16.0
+       mkdir : /usr/local/n/versions/node/14.16.0
+       fetch : https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-x64.tar.xz
+   installed : v14.16.0 (with npm 6.14.11)
+
+$
+----
+
+==== upgrade
+
+. List installed versions
++
+[source,console]
+----
+$ n list
+node/12.18.3
+node/14.16.0
+----
+
+. Install LTS
++
+[source,console]
+----
+$ sudo n lts
+[sudo] password for guest:
+
+  installing : node-v14.17.3
+       mkdir : /usr/local/n/versions/node/14.17.3
+       fetch : https://nodejs.org/dist/v14.17.3/node-v14.17.3-linux-x64.tar.xz
+   installed : v14.17.3 (with npm 6.14.13)
+
+----
+
+. Verify installed.
++
+[source,console]
+----
+$ n list
+node/12.18.3
+node/14.16.0
+node/14.17.3
+----
+
+. Remove install
++
+[source,console]
+----
+$ sudo n rm 14.16.0
+----
+
+. Verify removed.
++
+[source,console]
+----
+$ n list
+node/12.18.3
+node/14.17.3
+----
+
+=== NVM: Node Version Manager
+
+[#install_nodejs_on_windows]
+==== Install Node.js (Windows)
+
+===== nvm for Windows
+
+.References
+* https://github.com/nvm-sh/nvm[nvm-sh/nvm: Node Version Manager - POSIX-compliant bash script to manage multiple active node.js versions^]
+* https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows[Set up NodeJS on native Windows | Microsoft Learn^]
+* https://github.com/coreybutler/nvm-windows/releases[Releases · coreybutler/nvm-windows^]
+* https://nodejs.org/en/[Node.js | nodejs.org^]
+* https://stackoverflow.com/questions/70958371/unexpected-token-when-trying-to-run-npm-install[node.js - Unexpected token '.' when trying to run 'npm install' - Stack Overflow^] +
+  npm SyntaxError: Unexpected token '.' - Google Search
+
+//^
+
+. List which versions of Node are currently installed
++
+[source,console]
+----
+PS> nvm ls
+
+No installations recognized.
+----
+
+. Install the current release of Node.js
++
+[source,console]
+----
+PS> nvm install latest
+Downloading node.js version 18.10.0 (64-bit)...
+Extracting...
+Complete
+
+
+Installation complete. If you want to use this version, type
+
+nvm use 18.10.0
+----
+
+. Install the latest stable LTS release of Node.js 
++
+[source,console]
+----
+PS> nvm list available
+
+|   CURRENT    |     LTS      |  OLD STABLE  | OLD UNSTABLE |
+|--------------|--------------|--------------|--------------|
+|   18.10.0    |   16.17.1    |   0.12.18    |   0.11.16    |
+|    18.9.1    |   16.17.0    |   0.12.17    |   0.11.15    |
+|    18.9.0    |   16.16.0    |   0.12.16    |   0.11.14    |
+|    18.8.0    |   16.15.1    |   0.12.15    |   0.11.13    |
+|    18.7.0    |   16.15.0    |   0.12.14    |   0.11.12    |
+|    18.6.0    |   16.14.2    |   0.12.13    |   0.11.11    |
+|    18.5.0    |   16.14.1    |   0.12.12    |   0.11.10    |
+|    18.4.0    |   16.14.0    |   0.12.11    |    0.11.9    |
+|    18.3.0    |   16.13.2    |   0.12.10    |    0.11.8    |
+|    18.2.0    |   16.13.1    |    0.12.9    |    0.11.7    |
+|    18.1.0    |   16.13.0    |    0.12.8    |    0.11.6    |
+|    18.0.0    |   14.20.1    |    0.12.7    |    0.11.5    |
+|    17.9.1    |   14.20.0    |    0.12.6    |    0.11.4    |
+|    17.9.0    |   14.19.3    |    0.12.5    |    0.11.3    |
+|    17.8.0    |   14.19.2    |    0.12.4    |    0.11.2    |
+|    17.7.2    |   14.19.1    |    0.12.3    |    0.11.1    |
+|    17.7.1    |   14.19.0    |    0.12.2    |    0.11.0    |
+|    17.7.0    |   14.18.3    |    0.12.1    |    0.9.12    |
+|    17.6.0    |   14.18.2    |    0.12.0    |    0.9.11    |
+|    17.5.0    |   14.18.1    |   0.10.48    |    0.9.10    |
+
+This is a partial list. For a complete list, visit https://nodejs.org/en/download/releases
+PS> nvm install 16.13.2
+----
+
+=== Nodist (Windows)
+* https://github.com/nullivex/nodist[nullivex/nodist: Natural node.js and npm version manager for windows.^]
+
+[source,ps1con]
+----
+cinst -y nodist
+nodist -v
+nodist dist
+nodist ls
+----
+
+. Lists all available node versions.
++
+[source,ps1con]
+----
+PS> nodist dist
+...
+----
+
+. Just checks, if the version is installed and installs it if not.
++
+[source,ps1con]
+----
+PS> nodist + 14.17.4
+ 14.17.4 [===============] 55545/55545 KiB 100% 0.0s
+14.17.4
+PS> nodist
+  (x64)
+  11.13.0
+  12.21.0
+> 14.16.0  (global: 14.16.0)
+  14.17.4
+PS>
+----
+
+. Sets the global node version requirement
++
+[source,ps1con]
+----
+PS> nodist global 14.17.4
+14.17.4
+14.17.4 (global)
+----
+
+. Set compatible npm version
++
+[source,ps1con]
+----
+nodist npm global match
+nodist npm 6.14.11
+nodist npm 7.20.3
+----
++
+[INFO]
+====
+* https://nodejs.org/ja/download/releases/[リリース一覧 | Node.js^]
+====
+
+. Remove version
++
+[source,ps1con]
+----
+> nodist - 14.16.0
+----
+
+[%collapsible]
+====
+[source,ps1con]
+----
+Windows PowerShell
+Copyright (C) 2009 Microsoft Corporation. All rights reserved.
+
+PS> nodist -v
+0.9.1
+PS> nodist dist
+  0.1.14
+  ...snip...
+  8.0.0
+  8.1.0
+  8.1.1
+  ...
+  8.16.1
+  ...
+  9.0.0
+  ...
+  9.11.0
+  9.11.1
+  9.11.2
+  10.0.0
+  ...snip...
+  10.16.1
+  10.16.2
+  10.16.3
+  11.0.0
+  ...snip...
+  11.13.0
+  11.14.0
+  11.15.0
+  12.0.0
+  ...snip...
+  12.11.1
+PS> nodist ls
+  (x64)
+> 11.13.0  (global: v11.13.0)
+PS>
+----
+====
