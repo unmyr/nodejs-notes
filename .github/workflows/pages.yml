@@ -32,6 +32,7 @@ jobs:
       with:
         node-version: 16
         cache: 'pnpm'
+        cache-dependency-path: ./pnpm-lock.yaml
     - run: pnpm install
     - run: pnpm run test:unit
     - run: pnpm exec vite build --base=/nodejs-notes/
