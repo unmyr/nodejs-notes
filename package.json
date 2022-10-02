@@ -1,0 +1,42 @@
+{
+  "name": "nodejs-notes",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "test:unit": "jest",
+    "test:e2e": "start-server-and-test dev http-get://127.0.0.1:5173 cypress",
+    "cypress": "cypress run",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-modules-commonjs": "7.18.6",
+    "@types/jest": "26",
+    "@typescript-eslint/eslint-plugin": "5",
+    "@typescript-eslint/parser": "5",
+    "@vitejs/plugin-vue": "3",
+    "@vue/babel-preset-app": "^5.0.8",
+    "@vue/eslint-config-prettier": "7",
+    "@vue/eslint-config-typescript": "11",
+    "@vue/test-utils": "2.1",
+    "babel-jest": "26",
+    "babel-preset-jest": "26",
+    "cypress": "10",
+    "eslint": "8",
+    "eslint-plugin-prettier": "3",
+    "eslint-plugin-vue": "9",
+    "jest": "26",
+    "prettier": "^2.7.1",
+    "start-server-and-test": "^1.14.0",
+    "ts-jest": "26",
+    "typescript": "4.8.4",
+    "vite": "3.1.4",
+    "vue-jest": "5.0.0-alpha.10",
+    "vue-tsc": "0.40.13"
+  }
+}
