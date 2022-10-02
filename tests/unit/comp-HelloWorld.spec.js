@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import HelloWorld from "../../hello-world/src/components/HelloWorld.vue";
 
 describe("HelloWorld.vue", () => {
   it("test HelloWorld", async () => {

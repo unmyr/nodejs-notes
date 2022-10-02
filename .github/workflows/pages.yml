@@ -26,6 +26,13 @@ jobs:
       uses: tonynv/asciidoctor-action@master
       with:
           program: "cd docs && make adoc"
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+    - run: npm install
+    - run: npm run test:unit
+    - run: npx vite build --base=/nodejs-notes/
     - name: Build with Jekyll
       uses: actions/jekyll-build-pages@v1
       with:
