@@ -9,6 +9,7 @@ include $(DOC_ROOT)/asciidoc.mk
 
 HTML_LIST=\
 mkdir_and_copy \
+$(DEST_DIR)/string.html \
 $(DEST_DIR)/version_manager.html \
 $(DEST_DIR)/index.html
 

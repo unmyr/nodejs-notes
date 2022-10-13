@@ -1,0 +1,190 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+endif::[]
+
+include::header.adoc[]
+
+== String
+
+=== Integer to String
+
+[source,javascript]
+----
+> (2).toString().padStart(3, "0")
+'002'
+----
+
+=== includes
+
+[source,javascript]
+----
+> 'This is a pen.'.includes('pen')
+true
+> 'This is a pen.'.includes('banana')
+false
+>
+----
+
+=== Regular Expression
+
+==== string regex backreferences
+
+[source,javascript]
+----
+> "[新]〇〇〇〇[字][デ]".replace(/(\[[新終]\])(.*)/, "$2$1")
+'〇〇〇〇[字][デ][新]'
+> "AAA (1)".replace(/AAA \(([0-9])\)/, function() { return ("AAA (" + arguments[1].padStart(2, "0")) + ")" })
+'AAA (01)'
+----
+
+* Kanji number to number
++
+[source,javascript]
+----
+> kanNum1 = '一'
+'一'
+> { 一: 1, 二: 2, 三: 3,}[kanNum]?.toString().padStart(2, "0") || kanNum
+'01'
+> kanNum = '四'
+'四'
+> { 一: 1, 二: 2, 三: 3,}[kanNum]?.toString().padStart(2, "0") || kanNum
+'四'
+----
++
+[source,javascript]
+----
+function japaneseNumberToArabicNumerals(kanNum) {
+  return (
+    {
+      一: 1,
+      二: 2,
+      三: 3,
+      四: 4,
+      五: 5,
+      六: 6,
+      七: 7,
+      八: 8,
+      九: 9,
+      十: 10,
+      十一: 11,
+    }[kanNum]?.toString() || kanNum
+  );
+}
+----
++
+[source,javascript]
+----
+> japaneseNumberToArabicNumerals('一')
+'1'
+> japaneseNumberToArabicNumerals('十一')
+'11'
+> japaneseNumberToArabicNumerals('拾')
+'拾'
+----
+
+* Replace kanji episode number
++
+[source,javascript]
+----
+function replaceKanjiEpNumber(text, kanNum) {
+  var kanNumMap = {
+    一: 1,
+    二: 2,
+    三: 3,
+    四: 4,
+    五: 5,
+    六: 6,
+    七: 7,
+    八: 8,
+    九: 9,
+    十: 10,
+  };
+  if (kanNum in kanNumMap) {
+    return "第" + kanNumMap[kanNum].toString().padStart(2, "0") + "話";
+  } else {
+    return text;
+  }
+}
+----
++
+[source,javascript]
+----
+function replaceKanjiEpNumber(text, kanNum) {
+  return {
+    一: 1,
+    二: 2,
+    三: 3,
+    四: 4,
+    五: 5,
+    六: 6,
+    七: 7,
+    八: 8,
+    九: 9,
+    十: 10,
+  }[kanNum]?.toString().padStart(2, "0").replace(/(.*)/, "第$1話") || text;
+}
+----
++
+[source,javascript]
+----
+> "第一話".replace(/第(.*)話/, replaceKanjiEpNumber);
+'第01話'
+> "第十話".replace(/第(.*)話/, replaceKanjiEpNumber);
+'第10話'
+> "第拾話".replace(/第(.*)話/, replaceKanjiEpNumber);
+'第拾話'
+----
+
+==== validate uuid
+
+* https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-guid[javascript - How to test valid UUID/GUID? - Stack Overflow^]
+
+.create
+[source,javascript]
+----
+const arr = Array.from({ length: 60 }, (_, i) => `00${i}`.slice(-2));
+----
+
+=== math
+
+==== parseInt
+
+[source,javascript]
+----
+> parseInt('10')
+10
+> parseInt(' 10')
+10
+> parseInt(' 10 ')
+10
+> parseInt('10 ')
+10
+> parseInt(-1)
+-1
+>
+----
+
+[source,javascript]
+.Pad a number with leading zeros in JavaScript
+----
+> parseInt('010')
+10
+>
+----
+
+[source,javascript]
+----
+> parseInt('')
+NaN
+> parseInt(undefined)
+NaN
+> parseInt(null)
+NaN
+> parseInt(NaN)
+NaN
+> parseInt(Infinity)
+NaN
+>
+----
