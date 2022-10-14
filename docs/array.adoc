@@ -1,0 +1,82 @@
+ifndef::leveloffset[]
+:toc: left
+:toclevels: 3
+:icons: font
+endif::[]
+
+include::header.adoc[]
+
+== Arrays
+
+=== Zip arrays
+
+* Zip arrays using `map`
++
+[source,javascript]
+----
+((keys, values) => keys.map((key, i) => [key, values[i]]))(
+  "abc".split(""),
+  [1, 2, 3]
+);
+----
++
+[source,javascript]
+.Results
+----
+[ [ 'a', 1 ], [ 'b', 2 ], [ 'c', 3 ] ]
+----
+
+=== Zip arrays as keys and values of an Object
+
+* Using `Object.assign`
++
+[source,javascript]
+----
+Object.assign(
+  ...((keys, values) => keys.map((key, i) => ({ [key]: values[i] })))(
+    "abc".split(""),
+    [1, 2, 3]
+  )
+);
+----
++
+[source,javascript]
+.Results
+----
+{ a: 1, b: 2, c: 3 }
+----
+
+* Using `Object.fromEntries`
++
+[source,javascript]
+----
+Object.fromEntries(
+  ((keys, values) => keys.map((key, i) => [key, values[i]]))(
+    "abc".split(""),
+    [1, 2, 3]
+  )
+);
+----
++
+[source,javascript]
+.Results
+----
+{ a: 1, b: 2, c: 3 }
+----
+
+* Using reduce
++
+[source,javascript]
+----
+((keys, values) =>
+  keys.reduce((results, key, i) => ((results[key] = values[i]), results), {}))(
+  "abc".split(""),
+  [1, 2, 3]
+);
+----
++
+[source,javascript]
+.Results
+----
+{ a: 1, b: 2, c: 3 }
+----
