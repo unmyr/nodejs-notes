@@ -137,7 +137,23 @@ function replaceKanjiEpNumber(text, kanNum) {
 '第拾話'
 ----
 
-==== validate uuid
+==== Lookahead and lookbehind
+
+* using positive lookbehind and positive lookahead
++
+[source,javascript]
+----
+> "第1シリーズ 第1話 5話".replace(/第([0-9])話/, "第0$1話");
+'第1シリーズ 第01話 5話'
+> "第1シリーズ 第1話 5話".replace(/(?<=第)([0-9])(?=話)/, "0$1");
+'第1シリーズ 第01話 5話'
+----
+
+.References
+* https://javascript.info/regexp-lookahead-lookbehind[Lookahead and lookbehind^] +
+  javascript regex forward look ahead - Google Search
+
+=== validate uuid
 
 * https://stackoverflow.com/questions/7905929/how-to-test-valid-uuid-guid[javascript - How to test valid UUID/GUID? - Stack Overflow^]
 
