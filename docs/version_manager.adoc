@@ -12,8 +12,6 @@ include::header.adoc[]
 === n package
 
 * https://qiita.com/seibe/items/36cef7df85fe2cefa3ea[Ubuntuに最新のNode.jsを難なくインストールする - Qiita]
-* https://co.bsnws.net/article/139[Node.jsのバージョンを管理するライブラリ「n」 | cupOF Interests^] +
-  node n package | Google Search
 
 //^
 
