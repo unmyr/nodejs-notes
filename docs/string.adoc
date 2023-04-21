@@ -39,6 +39,15 @@ false
 'AAA (01)'
 ----
 
+* Regular expression to get strings between parentheses
++
+[source,javascript]
+.Use non-greedy matching(.+?) in regular expressions
+----
+> "Foo「Hello world」＃02".replace(/Foo「(.+?)」/, "$1")
+'Hello world＃02'
+----
+
 * Kanji number to number
 +
 [source,javascript]
